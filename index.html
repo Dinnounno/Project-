@@ -121,27 +121,29 @@
             &copy; 2026 Sikha Hita Priyanti. All rights reserved. </p>
     </section>
 
-    <script>
-        // === 1. FITUR SCROLL ANIMATION (MUNCUL PERLAHAN) ===
-        // Menambahkan 'pendengar' (listener) saat user melakukan scroll
-        window.addEventListener("scroll", function() {
-            // Mengambil semua elemen yang punya class "reveal"
-            const reveals = document.querySelectorAll(".reveal");
+   // === 1. FITUR SCROLL ANIMATION (MUNCUL PERLAHAN) ===
 
-            // Melakukan perulangan (looping) untuk mengecek setiap elemen
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight; // Tinggi layar browser
-                const elementTop = reveals[i].getBoundingClientRect().top; // Jarak elemen dari atas layar
-                const elementVisible = 150; // Jarak toleransi sebelum muncul
+// Kita buat fungsinya bernama 'cekReveal'
+function cekReveal() {
+    const reveals = document.querySelectorAll(".reveal");
+    for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150; // Jarak sebelum muncul
 
-                // Jika posisi elemen sudah masuk area pandang...
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active"); // Tambahkan class 'active' (muncul)
-                } else {
-                    reveals[i].classList.remove("active"); // Hapus class 'active' (hilang)
-                }
-            }
-        });
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } else {
+            reveals[i].classList.remove("active");
+        }
+    }
+}
+
+// 1. Jalankan fungsi saat layar di-scroll
+window.addEventListener("scroll", cekReveal);
+
+// 2. PENTING: Jalankan fungsi ini SATU KALI saat web pertama kali dibuka
+cekReveal();
 
         // === 2. FITUR GANTI TEMA (DARK / LIGHT MODE) ===
         // Mengambil elemen tombol berdasarkan ID
