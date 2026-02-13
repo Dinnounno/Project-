@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <link rel="stylesheet" href="taruh.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark">
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#pendidikan">Pendidikan</a></li>
+                <li><a href="#karya">Karya</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+            <button id="themeToggle" class="theme-toggle">🌙</button>
+        </div>
+    </nav>
+
+    <section class="hero reveal" id="Home">
+        <div class="konten">
+            <img src="hero.png" alt="gambar awal">
+            <h3>Halo, nama saya</h3>
+            <h1>Sikha Hita Priyanti</h1>
+            <p>Saya adalah seorang <span>Mahasiswa </span>yang suka membuat hal-hal keren di internet tapi tidak bisa menerapkannya dan malas mengikuti perkembangannya.</p>
+            <a href="#karya" class="tombol">Lihat Karya Saya</a>
+            <a href="cv.pdf" class="tombol" download>Download CV</a>
+        </div>
+    </section>
+
+    <section class="pendidikan reveal" id="pendidikan">
+        <h1 class="judul-section">Riwayat Pendidikan</h1>
+        <div class="timeline-baru">
+            <div class="timeline-item">
+                <div class="titik"></div> <div class="tahun">2010 - 2012</div>
+                <div class="isi">
+                    <h3>TK Santo Yoshep</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="titik"></div>
+                <div class="tahun">2012 - 2018</div>
+                <div class="isi">
+                    <h3>SD Negeri 2 Semarapura</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="titik"></div>
+                <div class="tahun">2018 - 2022</div>
+                <div class="isi">
+                    <h3>SMP Negeri 2 Semarapura</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="titik"></div>
+                <div class="tahun">2022 - 2025</div>
+                <div class="isi">
+                    <h3>SMA Negeri 2 Semarapura</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="titik"></div>
+                <div class="tahun">2025 - Sekarang</div>
+                <div class="isi">
+                    <h3>Universitas Udayana</h3>
+                    <p>Jurusan Teknologi Informasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="work reveal" id="karya">
+        <h1 class="judul">KARYA TERBARU</h1>
+        <p style="color:#aaa; margin-bottom:30px;">Beberapa project yang pernah saya kerjakan</p>
+        <div class="row">
+            <div class="work-col" onclick="alert('Detail project coming soon!')">
+                <img src="kom.png" alt="gambar karya 1">
+                <div class="layer">
+                    </div>
+            </div>
+            <div class="work-col" onclick="alert('Detail project coming soon!')">
+                <img src="kom.png" alt="gambar karya 2">
+                <div class="layer">
+                </div>
+            </div>
+            <div class="work-col" onclick="alert('Detail project coming soon!')">
+                <img src="kom.png" alt="gambar karya 3">
+                <div class="layer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contac reveal" id="kontak">
+        <p class="judulsec">Media Sosial</p>
+      <div class="roww">
+    
+    <a href="https://www.instagram.com/sikhapryn?igsh=MXMzNHppYndtNnN0dQ==" target="_blank" class="contac-y">
+        <img src="ig.png" alt="Instagram">
+        <h3>Sikhapryn</h3>
+    </a>
+
+    <a href="https://line.me/ti/p/DugLtnv9dS" target="_blank" class="contac-y">
+        <img src="line.png" alt="Line">
+        <h3>sikhahitapriyanti</h3>
+    </a>
+
+    <a href="https://www.linkedin.com/in/sikha-hita-priyanti-a95606380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="contac-y">
+        <img src="link.png" alt="LinkedIn">
+        <h3>Sikha Hita Priyanti</h3>
+    </a>
+
+</div>
+        <p style="margin-top: 20px; font-size: 12px; color: #777;">
+            &copy; 2026 Sikha Hita Priyanti. All rights reserved. </p>
+    </section>
+
+    <script>
+        // === 1. FITUR SCROLL ANIMATION (MUNCUL PERLAHAN) ===
+        // Menambahkan 'pendengar' (listener) saat user melakukan scroll
+        window.addEventListener("scroll", function() {
+            // Mengambil semua elemen yang punya class "reveal"
+            const reveals = document.querySelectorAll(".reveal");
+
+            // Melakukan perulangan (looping) untuk mengecek setiap elemen
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight; // Tinggi layar browser
+                const elementTop = reveals[i].getBoundingClientRect().top; // Jarak elemen dari atas layar
+                const elementVisible = 150; // Jarak toleransi sebelum muncul
+
+                // Jika posisi elemen sudah masuk area pandang...
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active"); // Tambahkan class 'active' (muncul)
+                } else {
+                    reveals[i].classList.remove("active"); // Hapus class 'active' (hilang)
+                }
+            }
+        });
+
+        // === 2. FITUR GANTI TEMA (DARK / LIGHT MODE) ===
+        // Mengambil elemen tombol berdasarkan ID
+        const toggle = document.getElementById("themeToggle");
+        
+        // Saat tombol diklik...
+        toggle.addEventListener("click", () => {
+            // Tambah/Hapus class "light" pada tag <body>
+            document.body.classList.toggle("light");
+
+            // Cek apakah sekarang mode light?
+            if (document.body.classList.contains("light")) {
+                toggle.textContent = "🌙"; // Jika Light, ubah ikon jadi Bulan
+            } else {
+                toggle.textContent = "☀️"; // Jika Dark, ubah ikon jadi Matahari
+            }
+        });
+
+        // === 3. FITUR NAVBAR HILANG/MUNCUL SAAT SCROLL ===
+        let lastScroll = 0;
+        const navbar = document.querySelector(".navbar");
+        
+        window.addEventListener("scroll", () => {
+            let currentScroll = window.pageYOffset; // Posisi scroll saat ini
+
+            // Jika scroll ke BAWAH (current > last) -> Sembunyikan Navbar
+            if (currentScroll > lastScroll) {
+                navbar.classList.add("hide");
+            } else {
+                // Jika scroll ke ATAS -> Munculkan Navbar
+                navbar.classList.remove("hide");
+            }
+            // Simpan posisi scroll terakhir untuk perbandingan selanjutnya
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+/* =========================================
+   1. GLOBAL RESET & BASIC (PENGATURAN DASAR)
+   ========================================= */
+html {
+    /* Membuat efek pergeseran layar menjadi halus saat menu diklik */
+    scroll-behavior: smooth; 
+    /* Memberi jarak 80px dari atas saat scroll berhenti (agar judul tidak tertutup navbar) */
+    scroll-padding-top: 80px;
+}
+
+* {
+    /* Menghapus margin & padding bawaan browser agar kita bisa atur sendiri */
+    margin: 0;
+    padding: 0;
+    /* PENTING: Memastikan padding tidak menambah lebar elemen (mencegah layout hancur) */
+    box-sizing: border-box;
+    /* Mengatur jenis huruf untuk seluruh website */
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* Latar belakang gradasi lingkaran (radial) dari biru gelap ke hitam */
+    background: radial-gradient(circle at top, #1f2b46, #0a0a0a);
+    color: #ffffff; /* Warna teks default putih */
+}
+
+/* =========================================
+   2. NAVBAR (MENU NAVIGASI ATAS)
+   ========================================= */
+.navbar {
+    /* Membuat navbar menempel (sticky) di atas layar saat discroll */
+    position: sticky;
+    top: 0;
+    /* Memastikan navbar selalu berada di lapisan paling atas (di atas elemen lain) */
+    z-index: 999;
+    /* Efek kaca buram (frosted glass) di belakang navbar */
+    backdrop-filter: blur(10px);
+    background: rgba(20, 20, 20, 0.9); /* Warna hitam transparan */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Garis tipis di bawah */
+    height: 70px;
+    
+    /* Menggunakan Flexbox untuk menata isi navbar */
+    display: flex;
+    align-items: center; /* Meratakan isi secara vertikal (atas-bawah) */
+    transition: transform 0.3s ease, background 0.3s; /* Animasi halus saat berubah */
+}
+
+/* Efek Navbar Hilang saat Scroll ke bawah (diatur via Javascript) */
+.navbar.hide {
+    /* Menggeser navbar ke atas (keluar layar) sejauh 100% tingginya */
+    transform: translateY(-100%);
+}
+
+.nav-container {
+    max-width: 1100px; /* Membatasi lebar agar tidak terlalu lebar di layar besar */
+    width: 100%;
+    margin: auto; /* Posisi tengah */
+    padding: 14px 24px;
+    
+    /* Flexbox: Membuat Logo(Kiri) dan Menu(Kanan) berjarak berjauhan */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.nav-menu {
+    list-style: none; /* Menghilangkan titik-titik (bullet) pada list */
+    display: flex; /* Membuat menu berjejer ke samping (horizontal) */
+    gap: 28px; /* Jarak antar menu */
+}
+
+.nav-menu a {
+    text-decoration: none; /* Menghilangkan garis bawah link */
+    font-weight: 500;
+    color: #eee;
+    position: relative; /* Diperlukan untuk animasi garis bawah */
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+/* PSEUDO-ELEMENT: Membuat garis animasi di bawah menu */
+.nav-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%; /* Awalnya lebar garis 0 (tidak terlihat) */
+    height: 2px;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    transition: 0.3s ease; /* Animasi memanjang */
+}
+
+/* Saat mouse diarahkan (Hover), lebar garis jadi 100% */
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* Tombol Ganti Tema (Bulan/Matahari) */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer; /* Ubah kursor jadi tangan */
+    padding: 6px 10px;
+    border-radius: 50%; /* Membuat tombol jadi bulat */
+    transition: 0.3s;
+    color: #fff;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1); /* Efek background tipis saat hover */
+}
+
+/* =========================================
+   3. HERO SECTION (HALAMAN DEPAN)
+   ========================================= */
+.hero {
+    height: 100vh; /* Tinggi 100% dari layar perangkat (Full Screen) */
+    display: flex;
+    justify-content: center; /* Tengah secara horizontal */
+    align-items: center;     /* Tengah secara vertikal */
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin: 10px 0;
+    
+    /* TEKNIK TEXT GRADIENT: Membuat warna teks gradasi */
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    -webkit-background-clip: text; /* Memotong background mengikuti bentuk teks */
+    -webkit-text-fill-color: transparent; /* Membuat isi teks transparan agar background terlihat */
+    
+    filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.3)); /* Efek cahaya bersinar */
+    transition: 0.3s ease;
+}
+
+.hero h3 {
+    font-size: 1.2rem;
+    color: #aaaaaa;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 600px; /* Membatasi panjang paragraf agar enak dibaca */
+    line-height: 1.6; /* Jarak antar baris kalimat */
+    transition: 0.3s ease;
+}
+
+.hero span {
+    color: #4facfe; /* Mewarnai kata "Mahasiswa" */
+    font-weight: bold;
+}
+
+/* Gambar Hero (Animasi Melayang) */
+.hero img {
+    width: 300px;
+    margin-bottom: 20px;
+    /* Menjalankan animasi bernama 'goyang' selamanya (infinite) */
+    animation: goyang 3s infinite ease-in-out; 
+}
+
+/* Definisi Animasi Goyang (Naik Turun) */
+@keyframes goyang {
+    0% { transform: translateY(0); }       /* Posisi awal */
+    50% { transform: translateY(-10px); }  /* Naik 10px */
+    100% { transform: translateY(0); }     /* Kembali ke awal */
+}
+
+/* Animasi Muncul Hero (Dipicu JS saat load) */
+.hero .konten {
+    animation: muncul 1.5s ease-out forwards;
+}
+
+/* Tombol Hero */
+.tombol {
+    text-decoration: none;
+    background-color: #4facfe;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px; /* Bentuk kapsul */
+    font-weight: bold;
+    transition: 0.3s;
+    margin: 5px;
+    display: inline-block; /* Agar margin & padding berfungsi pada tag <a> */
+}
+
+.tombol:hover {
+    background-color: #00f2fe;
+    transform: scale(1.1); /* Membesar 10% saat disentuh */
+}
+
+/* =========================================
+   4. PENDIDIKAN SECTION (TIMELINE)
+   ========================================= */
+.pendidikan {
+    min-height: 100vh;
+    padding-top: 120px;
+}
+
+.judul-section {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #4facfe;
+}
+
+/* Container Timeline (Wadah Garis Waktu) */
+.timeline-baru {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px 0;
+}
+
+/* MEMBUAT GARIS VERTIKAL DI TENGAH */
+.timeline-baru::after {
+    content: '';
+    position: absolute;
+    width: 4px; /* Ketebalan garis */
+    background-color: #4facfe;
+    top: 0;
+    bottom: 0;
+    left: 50%; /* Posisi tepat di tengah layar */
+    margin-left: -2px; /* Geser kiri sedikit agar pas tengah */
+}
+
+/* Kotak Item Timeline */
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%; /* Lebar kotak hanya setengah layar */
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+/* LOGIKA ZIG-ZAG: */
+/* Item Ganjil (1, 3, 5) -> Rata Kanan, Posisi Kiri */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+/* Item Genap (2, 4) -> Rata Kiri, Posisi Kanan (Mulai dari 50%) */
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+/* Titik Bulat Timeline */
+.titik {
+    width: 20px;
+    height: 20px;
+    background-color: #1a1a1a;
+    border: 4px solid #fff;
+    border-radius: 50%; /* Membuat jadi bulat sempurna */
+    position: absolute;
+    top: 15px;
+    z-index: 10;
+}
+
+/* Mengatur posisi titik agar menempel di garis tengah */
+.timeline-item:nth-child(odd) .titik {
+    right: -12px;
+}
+.timeline-item:nth-child(even) .titik {
+    left: -12px;
+}
+
+/* =========================================
+   5. KARYA SECTION (PORTFOLIO)
+   ========================================= */
+.work {
+    width: 85%;
+    margin: 50px auto;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.judul {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* Meratakan kartu di tengah */
+    gap: 20px;
+    flex-wrap: wrap; /* Agar kartu turun ke bawah jika layar sempit (Responsif) */
+}
+
+.work-col {
+    flex-basis: 30%; /* Lebar dasar kartu sekitar 30% layar */
+    border-radius: 10px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden; /* Mencegah gambar keluar dari kotak saat di-zoom */
+    cursor: pointer;
+    background-color: #262626;
+    padding: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Bayangan kotak */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+/* Efek Hover: Kartu naik sedikit */
+.work-col:hover {
+    transform: translateY(-10px);
+}
+
+.work-col img {
+    width: 60%;
+    height: 150px;
+    object-fit: cover; /* Agar gambar tidak gepeng */
+    display: block;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Layer Overlay (Warna Transparan di atas gambar) */
+.work-col .layer {
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute; /* Menumpuk di atas elemen lain */
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: 0.5s;
+}
+
+/* Saat kartu di-hover, layer muncul */
+.work-col:hover .layer {
+    opacity: 1;
+}
+
+/* Teks judul muncul dari bawah */
+.work-col:hover .layer h3 {
+    bottom: 45%;
+    opacity: 1;
+}
+
+/* Gambar ikut membesar (Zoom Effect) */
+.work-col:hover img {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   6. KONTAK / FOOTER SECTION
+   ========================================= */
+.contac {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    padding: 25px 20px; 
+    background: linear-gradient(180deg, #050505, #000);
+}
+
+.judulsec {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px; 
+    color: #7fb8ff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(79, 172, 254, 0.5);
+}
+
+.roww {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.contac-y {
+    min-width: 200px;
+    width: auto;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 8px 20px; 
+    
+    border-radius: 999px; /* Membuat bentuk kapsul penuh */
+    background: rgba(20, 20, 20, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.35s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    animation: muncul 0.8s ease forwards;
+   text-decoration: none; /* WAJIB: Agar tidak ada garis bawah pada link */
+    cursor: pointer;       /* Agar kursor berubah jadi tangan */
+}
+
+.contac-y img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.contac-y h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* --- Hapus kode .contac-y:hover yang lama, ganti dengan ini --- */
+
+/* Efek Dasar (Naik saat disentuh) */
+.contac-y:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 1. INSTAGRAM (Urutan ke-1): Warna Pink-Ungu */
+.contac-y:nth-child(1):hover {
+    border-color: #d62976;
+    box-shadow: 0 0 25px rgba(214, 41, 118, 0.6);
+}
+.contac-y:nth-child(1):hover h3 {
+    color: #d62976;
+    text-shadow: 0 0 10px rgba(214, 41, 118, 0.8);
+}
+
+/* 2. LINE (Urutan ke-2): Warna Hijau */
+.contac-y:nth-child(2):hover {
+    border-color: #06c755;
+    box-shadow: 0 0 25px rgba(6, 199, 85, 0.6);
+}
+.contac-y:nth-child(2):hover h3 {
+    color: #06c755;
+    text-shadow: 0 0 10px rgba(6, 199, 85, 0.8);
+}
+
+/* 3. LINKEDIN (Urutan ke-3): Warna Biru */
+.contac-y:nth-child(3):hover {
+    border-color: #0077b5;
+    box-shadow: 0 0 25px rgba(0, 119, 181, 0.6);
+}
+.contac-y:nth-child(3):hover h3 {
+    color: #0077b5;
+    text-shadow: 0 0 10px rgba(0, 119, 181, 0.8);
+}
+
+/* =========================================
+   7. ANIMASI & UTILITY
+   ========================================= */
+/* Definisi Animasi Muncul dari Bawah */
+@keyframes muncul {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* Mulai dari posisi agak bawah */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Ke posisi normal */
+    }
+}
+
+/* Class 'reveal' untuk Scroll Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+/* Class 'active' ditambahkan JS saat elemen terlihat di layar */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   8. LIGHT MODE (TEMA TERANG)
+   ========================================= */
+/* Override (menimpa) warna jika body punya class 'light' */
+body.light {
+    background: #f5f7fb; /* Background jadi putih terang */
+    color: #111; /* Teks jadi hitam */
+}
+
+body.light .navbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body.light .nav-menu a {
+    color: #222; /* Menu jadi hitam */
+}
+
+body.light .theme-toggle {
+    color: #222;
+}
+
+body.light .hero {
+    background: linear-gradient(135deg, #e8f1ff, #ffffff);
+}
+
+/* Memaksa semua judul & paragraf jadi hitam di mode terang */
+body.light h1,
+body.light h2,
+body.light h3,
+body.light p {
+    color: #111 !important;
+}
+
+body.light .hero h1 {
+    /* Gradient biru yang lebih gelap agar terbaca di background putih */
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Kotak karya & kontak jadi putih di mode terang */
+body.light .work-col,
+body.light .contac-y {
+    background: #ffffff !important;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+body.light .contac {
+    background: #f5f7fb !important;
+}
+
+body.light .contac-y h3 {
+    color: #111 !important;
+}
+
+/* =========================================
+   9. RESPONSIVE (TAMPILAN KHUSUS HP)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* Navbar HP: Jarak menu lebih rapat */
+    .nav-menu {
+        gap: 15px;
+    }
+    .nav-menu a {
+        font-size: 14px;
+    }
+
+    /* Hero HP: Font lebih kecil agar muat */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Timeline HP: Hapus mode Zig-Zag, jadi lurus rata kiri */
+    .timeline-baru::after {
+        left: 31px; /* Geser garis ke kiri layar */
+    }
+    .timeline-item {
+        width: 100%; /* Kotak memenuhi lebar layar */
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left; /* Semua teks rata kiri */
+    }
+    /* Semua titik pindah ke kiri garis */
+    .timeline-item:nth-child(odd) .titik,
+    .timeline-item:nth-child(even) .titik {
+        left: 19px;
+        right: auto;
+    }
+
+    /* Karya HP: Satu kartu per baris */
+    .work-col {
+        flex-basis: 100%;
+    }
+    .work-col img {
+        width: 80%;
+    }
+}
